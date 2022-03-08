@@ -6,9 +6,10 @@ on transactions. It also allows team building through a referral system, and mos
 importantly, compound interest. 
 
 ## Disclaimer
-Signing transactions via this script requires the use of a wallet's private key, meaning you need to handle your private key locally on the computer from which you want to run this script on.
-By using this script you agrees to take full responsibility for your private key and wallets security!
-I take no responsibility in lost funds, wallets or anything related to using this script.
+Signing transactions via this script requires the use of a **wallet's private key**, meaning you need to **handle your private key locally** on the computer from which you want to run this script on.
+By using this script **you agrees to take full responsibility** for your private key and wallets security!
+**I take no responsibility** in lost funds, wallets or anything related to using this script.
+The script relies on many things - such as blockchain congestion, dropped network packages, etc. I have tried to implement some resilience to the script but even though it runs by itself, **you** have the responsibility to watch it, maintain it and make sure it doesn't run wild or unexpectingly.
 
 ## Prerequisites
 1. A clean and secure computer/nuc/raspberry pi that can run 24/7.
