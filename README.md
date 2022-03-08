@@ -56,7 +56,7 @@ $ python -m pip install python-dotenv
 5. Go back to the python terminal and do the following:
 ```py
 >>>fernet = Fernet(key)
->>>encMessage = fernet.encrypt('YOURKEYHERE'.encode())
+>>>encMessage = fernet.encrypt('YOURPRIVATEKEYHERE'.encode())
 >>>encMessage.decode()
 ```
 
