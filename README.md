@@ -75,6 +75,25 @@ $ python plant.py
 This terminal window will always need to remain open for the script to function. If the terminal window closes, just execute
 `python plant.py` again.
 
+## Cycle settings
+The script includes a cycle-handler. This means that you can determine a cycle on when to `plant` and when to `claim`.
+Open up the `hydrate.py` and search for the section where the `cycle` is defined - it's around line 33.
+One cycle includes 3 inputs:
+- Id (1-indexed, meaning that the first cycle should always start with 1)
+- Type (either use `plant` or `claim`)
+- MinimumPlants (you might be able to plant because 24h has past but you only want to plant, when you have a minimum Plants of this value)
+
+Each cycle is defined by one item. Set as many items you want - just make sure to increment the Id of each item. When the cycle ends, it starts again from the top.
+The following is an example of a cycle:
+```py
+cycle.append( cycleItem(1, "plant", 1.00) )
+cycle.append( cycleItem(2, "plant", 1.00) )
+cycle.append( cycleItem(3, "plant", 1.00) )
+cycle.append( cycleItem(4, "claim", 1.00) )
+```
+
+Defaults for the cycle is only to `plant`.
+
 # Donations
 If this script helps you, consider supporting me gifiting me some piglets: 
 - **wallet:** *0x361472B5784e83fBF779b015f75ea0722741f304*
