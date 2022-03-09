@@ -43,6 +43,7 @@ web3, cryptography, python-dotenv
 $ python -m pip install web3
 $ python -m pip install cryptography
 $ python -m pip install python-dotenv
+$ python -m pip install cloudscraper
 ```
 
 3. In a python terminal, import `cryptography` and encrypt your private key
