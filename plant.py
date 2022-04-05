@@ -16,7 +16,7 @@ seeds_per_day_per_plant = 86400
 start_polling_threshold_in_seconds = 10
 
 # load private key
-wallet_private_key = open('key.txt', "r").readline()
+wallet_private_key = open('key.txt', "r").readline().strip().strip('\'').strip('\"').strip()
 
 # load abi
 f = open('garden_abi.json')
