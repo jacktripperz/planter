@@ -111,3 +111,4 @@ Or using my buddy referral code:
 - [Animal Farm, PiggyBank](https://theanimal.farm/piggybank/0x361472B5784e83fBF779b015f75ea0722741f304) - 3% per day, high risk, high reward, huge TimeLocking bonuses! Get the [auto-script here](https://github.com/jacktripperz/piggybanker)
 - [Baked Beans](https://bakedbeans.io?ref=0x361472B5784e83fBF779b015f75ea0722741f304) - 8% per day, high risk, high reward! Get the [auto-script here](https://github.com/jacktripperz/bakedbeans)
 - [BNB Miner](https://bnbminer.finance?ref=0x361472B5784e83fBF779b015f75ea0722741f304) - 3% per day, high risk, high reward! Get the [auto-script here](https://github.com/jacktripperz/bnbminer)
+- [Piston](https://piston-token.com/ref/jacktz) - 1% per day - low risk, high reward, no decay! Get the [auto-script here](https://github.com/jacktripperz/piston)
