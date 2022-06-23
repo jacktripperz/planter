@@ -80,7 +80,7 @@ This terminal window will always need to remain open for the script to function.
 
 ## Cycle settings
 The script includes a cycle-handler. This means that you can determine a cycle on when to `plant` and when to `claim`.
-Open up the `hydrate.py` and search for the section where the `cycle` is defined - it's around line 33.
+Open up the `plant.py` and search for the section where the `cycle` is defined - it's around line 33.
 One cycle includes 3 inputs:
 - Id (1-indexed, meaning that the first cycle should always start with 1)
 - Type (either use `plant` or `claim`)

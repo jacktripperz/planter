@@ -11,7 +11,7 @@ lp_contract_addr = "0xa0feB3c81A36E885B6608DF7f0ff69dB97491b58"
 wallet_public_addr = "0x361472B5784e83fBF779b015f75ea0722741f304"
 dextool_lp_url = "https://www.dextools.io/chain-bsc/api/pair/search?p=0xa0feb3c81a36e885b6608df7f0ff69db97491b58"
 loop_sleep_seconds = 0.5
-margin_of_error = 0.1
+margin_of_error = 0.01
 seeds_per_day_per_plant = 86400
 start_polling_threshold_in_seconds = 10
 
@@ -38,14 +38,14 @@ class cycleItem:
 
 # cycle types are "plant" or "harvest"
 cycle = [] 
-cycle.append( cycleItem(1, "plant", 1.00) )
-cycle.append( cycleItem(2, "plant", 1.00) )
-cycle.append( cycleItem(3, "plant", 1.00) )
-cycle.append( cycleItem(4, "plant", 1.00) )
-cycle.append( cycleItem(5, "plant", 1.00) )
-cycle.append( cycleItem(6, "plant", 1.00) )
-cycle.append( cycleItem(7, "plant", 1.00) )
-nextCycleId = 7
+cycle.append( cycleItem(1, "plant", 10.00) )
+cycle.append( cycleItem(2, "plant", 10.00) )
+cycle.append( cycleItem(3, "plant", 10.00) )
+cycle.append( cycleItem(4, "plant", 10.00) )
+cycle.append( cycleItem(5, "plant", 10.00) )
+cycle.append( cycleItem(6, "plant", 10.00) )
+cycle.append( cycleItem(7, "harvest", 10.00) )
+nextCycleId = 1
 
 # methods
 def total_liquidity():
@@ -124,8 +124,11 @@ def getNextCycleId(currentCycleId):
 
 # create infinate loop that checks contract every set sleep time
 nextCycleType = findCycleType(nextCycleId)
+retryCount = 0
 
-def itterate(nextCycleId, nextCycleType):
+def itterate():
+    global nextCycleId
+    global nextCycleType
     seedsFor1Plant = seeds_for_1_plant()
     available = available_seeds()
     plantedPlants = planted_plants()
@@ -145,10 +148,10 @@ def itterate(nextCycleId, nextCycleType):
     hoursUntilPlanting = daysUntilPlanting * 24 
     secondsUntilPlanting = hoursUntilPlanting * 60 * 60
 
-    totalSupply = total_supply()
-    totalLiquidityValue = total_liquidity()
+    # totalSupply = total_supply()
+    # totalLiquidityValue = total_liquidity()
 
-    lpValuePerDay = (float(totalLiquidityValue)/float(totalSupply))*plantLpValue*plantsPerDay
+    # lpValuePerDay = (float(totalLiquidityValue)/float(totalSupply))*plantLpValue*plantsPerDay
 
     dateTimeObj = datetime.now()
     timestampStr = dateTimeObj.strftime("[%d-%b-%Y (%H:%M:%S)]")
@@ -156,8 +159,9 @@ def itterate(nextCycleId, nextCycleType):
     sleep = loop_sleep_seconds 
     
     print("********** STATS *******")
+    print(f"{timestampStr} Next cycle id: {nextCycleId}")
     print(f"{timestampStr} Next cycle type: {nextCycleType}")
-    print(f"{timestampStr} LP daily value: {(lpValuePerDay):.3f}")
+    # print(f"{timestampStr} LP daily value: {(lpValuePerDay):.3f}")
     print(f"{timestampStr} Plants per day: {(seedsPerDay/seedsFor1Plant):.3f}")
     print(f"{timestampStr} Planted plants: {plantedPlants:.3f}")
     print(f"{timestampStr} Available plants: {availablePlants:.3f}")
@@ -193,15 +197,22 @@ def itterate(nextCycleId, nextCycleType):
 
     countdown(int(sleep))
 
-retryCount = 0
-while True:
+def run(): 
+    global retryCount
     try: 
-        if retryCount < 5:
-            itterate(nextCycleId, nextCycleType)  
+        itterate()
+        run()
     except Exception as e:
-        print("[EXCEPTION] Something went wrong! Message:")
-        print(f"[EXCEPTION] {e}")
         retryCount = retryCount + 1
+        print("********* EXCEPTION *****************")
+        print("Something went wrong! Message:")
+        print(f"{e}")
         if retryCount < 5:
-            itterate(nextCycleId, nextCycleType)
-        print(f"[EXCEPTION] Retrying! (retryCount: {retryCount})")
+            print(f"[EXCEPTION] Retrying! (retryCount: {retryCount})")
+            print("*************************************")
+            run()
+        else:
+            print("********* TERMINATING *****************")
+            print("Expection occurred 5 times. Terminating!")
+
+run()
